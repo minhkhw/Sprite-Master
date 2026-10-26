@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+
+Sitemap: https://sprite-cutter-studio.vercel.app/sitemap.xml

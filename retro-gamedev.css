@@ -1,0 +1,567 @@
+/* ==========================================================================
+   🎮 SPRITE MASTER - RETRO PIXEL ART & GAME DEV DESIGN SYSTEM
+   Phong cách: Retro Arcade / Neon Cyber Grid / Game Developer Studio
+   ========================================================================== */
+
+/* 1. Google Fonts Import: Pixel Arcade + Clean Monospace */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Neon Retro Game Palette */
+  --retro-bg: #090a12;
+  --retro-bg-alt: #101322;
+  --retro-card-bg: rgba(18, 22, 39, 0.85);
+  --retro-border: #2a3258;
+  --retro-neon-cyan: #00f0ff;
+  --retro-neon-green: #00ff88;
+  --retro-neon-purple: #a855f7;
+  --retro-neon-pink: #ff2a85;
+  --retro-neon-yellow: #ffb703;
+  --retro-text: #e2e8f0;
+  --retro-text-muted: #94a3b8;
+  --retro-font-pixel: 'Silkscreen', 'Press Start 2P', monospace;
+  --retro-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* 2. Global Cyber Retro Background & Neon Grid */
+body {
+  background-color: var(--retro-bg) !important;
+  color: var(--retro-text) !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.08) 0%, transparent 50%) !important;
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100% !important;
+  background-attachment: fixed !important;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle CRT Scanlines Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* 3. Header: Retro Arcade Command Bar */
+header[data-testid="site-header"], header.sticky {
+  background: rgba(10, 13, 24, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 2px solid var(--retro-neon-purple) !important;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25), inset 0 -1px 0 var(--retro-neon-cyan) !important;
+}
+
+header a.font-semibold {
+  font-family: var(--retro-font-pixel) !important;
+  letter-spacing: 0.5px !important;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+header a.font-semibold:hover {
+  transform: scale(1.04);
+}
+
+header a.font-semibold img {
+  filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.8)) !important;
+  animation: retro-gem-pulse 3s infinite ease-in-out;
+}
+
+@keyframes retro-gem-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.7)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.9)); transform: scale(1.06); }
+}
+
+/* Header Links & Buttons */
+header nav a, header button {
+  font-family: var(--retro-font-mono) !important;
+  font-size: 13px !important;
+  text-transform: uppercase;
+}
+
+/* 4. Dropzone / Hero Upload Area: Arcade Blueprint Screen */
+div[role="button"].cursor-pointer,
+.border-dashed {
+  background: rgba(16, 20, 36, 0.75) !important;
+  border: 2px dashed var(--retro-neon-cyan) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.12), inset 0 0 30px rgba(0, 240, 255, 0.05) !important;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+div[role="button"].cursor-pointer:hover,
+.border-dashed:hover {
+  background: rgba(22, 28, 52, 0.9) !important;
+  border-color: var(--retro-neon-green) !important;
+  box-shadow: 0 0 35px rgba(0, 255, 136, 0.3), inset 0 0 40px rgba(0, 255, 136, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+/* Retro Corner Brackets for Upload Area */
+div[role="button"].cursor-pointer::before,
+div[role="button"].cursor-pointer::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+div[role="button"].cursor-pointer::before {
+  top: 6px; left: 6px;
+  border-top: 3px solid var(--retro-neon-cyan);
+  border-left: 3px solid var(--retro-neon-cyan);
+}
+
+div[role="button"].cursor-pointer::after {
+  bottom: 6px; right: 6px;
+  border-bottom: 3px solid var(--retro-neon-green);
+  border-right: 3px solid var(--retro-neon-green);
+}
+
+/* Upload Circle Icon Badge */
+div[role="button"] .bg-background {
+  background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+  border: 2px solid var(--retro-neon-cyan) !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
+}
+
+div[role="button"] .bg-background svg {
+  color: var(--retro-neon-cyan) !important;
+  opacity: 1 !important;
+  animation: retro-icon-bounce 2s infinite ease-in-out;
+}
+
+@keyframes retro-icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Upload Text Formatting */
+div[role="button"] p {
+  font-family: var(--retro-font-mono) !important;
+  color: #f1f5f9 !important;
+  letter-spacing: 0.5px;
+}
+
+/* 5. Main Content Card Container */
+.rounded-lg.border.bg-card,
+div[data-testid="main-panel"] {
+  background: var(--retro-card-bg) !important;
+  border: 2px solid var(--retro-border) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Section Labels */
+label {
+  font-family: var(--retro-font-pixel) !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+  color: var(--retro-neon-cyan) !important;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+label::before {
+  content: "▶";
+  font-size: 8px;
+  color: var(--retro-neon-green);
+}
+
+/* 6. Buttons: Tactile Retro Arcade Style */
+button, .button {
+  font-family: var(--retro-font-mono) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  transition: all 0.15s ease-in-out !important;
+}
+
+/* Primary Action Buttons */
+button.bg-primary,
+button[data-testid="download-btn"],
+button[data-testid="export-btn"] {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #34d399 !important;
+  box-shadow: 0 4px 0 #065f46, 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+button.bg-primary:hover,
+button[data-testid="download-btn"]:hover,
+button[data-testid="export-btn"]:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 4px 0 #064e3b, 0 8px 20px rgba(16, 185, 129, 0.6) !important;
+  transform: translateY(-1px);
+}
+
+button.bg-primary:active,
+button[data-testid="download-btn"]:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #064e3b !important;
+}
+
+/* Standard Secondary Buttons */
+button.bg-background,
+button.border-input,
+button.bg-secondary {
+  background: #15192c !important;
+  border: 1px solid var(--retro-border) !important;
+  color: #f8fafc !important;
+  box-shadow: 0 3px 0 #0b0e1b !important;
+}
+
+button.bg-background:hover,
+button.border-input:hover,
+button.bg-secondary:hover {
+  background: #1c233d !important;
+  border-color: var(--retro-neon-cyan) !important;
+  color: var(--retro-neon-cyan) !important;
+  box-shadow: 0 3px 0 #0b0e1b, 0 0 12px rgba(0, 240, 255, 0.25) !important;
+}
+
+button.bg-background:active,
+button.border-input:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 #0b0e1b !important;
+}
+
+/* Destructive / Delete Buttons */
+button.bg-destructive,
+button[data-testid="exclude-btn"] {
+  background: linear-gradient(135deg, #e11d48, #be123c) !important;
+  border: 1px solid #f43f5e !important;
+  box-shadow: 0 3px 0 #881337 !important;
+}
+
+/* 7. Canvas & Editor Workspace HUD */
+canvas {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 2px var(--retro-border) !important;
+  border-radius: 8px;
+}
+
+/* Toolbar Controls */
+div[role="toolbar"],
+div[data-testid="canvas-toolbar"],
+div[data-testid="bulk-actions"] {
+  background: rgba(14, 18, 33, 0.95) !important;
+  border: 1px solid var(--retro-border) !important;
+  border-radius: 10px !important;
+  padding: 6px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 8. Feature Cards / Information Section: 16-Bit Cartridge Style */
+section[aria-labelledby="about-heading"] {
+  border-top: 2px dashed rgba(168, 85, 247, 0.3);
+  padding-top: 3rem;
+}
+
+section[aria-labelledby="about-heading"] h2 {
+  font-family: var(--retro-font-pixel) !important;
+  font-size: 15px !important;
+  color: var(--retro-neon-cyan) !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+section[aria-labelledby="about-heading"] h2::before {
+  content: "⚡";
+  font-size: 14px;
+}
+
+section[aria-labelledby="about-heading"] ul.grid > li {
+  background: rgba(16, 21, 39, 0.8) !important;
+  border: 1px solid var(--retro-border) !important;
+  border-left: 4px solid var(--retro-neon-purple) !important;
+  border-radius: 8px !important;
+  padding: 16px 20px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+section[aria-labelledby="about-heading"] ul.grid > li:hover {
+  transform: translateX(4px) translateY(-2px);
+  border-color: var(--retro-neon-cyan) !important;
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.2) !important;
+}
+
+section[aria-labelledby="about-heading"] ul.grid > li h3 {
+  font-family: var(--retro-font-mono) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+section[aria-labelledby="about-heading"] ul.grid > li h3::before {
+  content: "🎮";
+  font-size: 12px;
+}
+
+section[aria-labelledby="about-heading"] ul.grid > li p {
+  color: var(--retro-text-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.6;
+}
+
+/* 9. Footer: Retro Game Dev Marquee */
+footer[data-testid="site-footer"] {
+  background: #060810 !important;
+  border-top: 2px solid var(--retro-border) !important;
+  position: relative;
+}
+
+footer[data-testid="site-footer"]::before {
+  content: "🕹️ SPRITE MASTER ENGINE • BUILD FOR UNITY, GODOT, PHASER & WEB GAMES 🕹️";
+  display: block;
+  font-family: var(--retro-font-pixel);
+  font-size: 9px;
+  color: var(--retro-neon-yellow);
+  text-align: center;
+  padding: 10px 0;
+  letter-spacing: 1.5px;
+  background: rgba(18, 24, 45, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer[data-testid="site-footer"] h2 {
+  font-family: var(--retro-font-mono) !important;
+  color: var(--retro-neon-cyan) !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+footer[data-testid="site-footer"] a {
+  color: var(--retro-text-muted) !important;
+  transition: color 0.15s;
+}
+
+footer[data-testid="site-footer"] a:hover {
+  color: var(--retro-neon-green) !important;
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+/* 10. Pro Tools Badge & Panel (Arcade Power-Up Style) */
+#pro-tools-badge {
+  background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%) !important;
+  border: 2px solid var(--retro-neon-cyan) !important;
+  box-shadow: 0 4px 0 #1e1b4b, 0 0 20px rgba(0, 240, 255, 0.5) !important;
+  font-family: var(--retro-font-pixel) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.5px !important;
+  border-radius: 8px !important;
+}
+
+#pro-tools-badge:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 6px 0 #1e1b4b, 0 0 30px rgba(0, 240, 255, 0.8) !important;
+}
+
+#pro-tools-panel {
+  background: rgba(10, 13, 26, 0.96) !important;
+  border: 2px solid var(--retro-neon-cyan) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.25) !important;
+  border-radius: 12px !important;
+  font-family: var(--retro-font-mono) !important;
+}
+
+#pro-tools-panel .pro-header {
+  background: linear-gradient(90deg, #1e1b4b, #312e81) !important;
+  border-bottom: 2px solid var(--retro-neon-purple) !important;
+}
+
+#pro-tools-panel .pro-header h3 {
+  font-family: var(--retro-font-pixel) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.5px;
+}
+
+/* 11. Retro Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090b14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a3258;
+  border-radius: 4px;
+  border: 1px solid var(--retro-neon-purple);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--retro-neon-purple);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+}
+
+/* 12. Inputs, Selects & Number Pickers: Retro Terminal Style */
+input[type="text"],
+input[type="number"],
+select {
+  background: #0c1020 !important;
+  border: 1px solid var(--retro-border) !important;
+  color: var(--retro-neon-cyan) !important;
+  font-family: var(--retro-font-mono) !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.2s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: var(--retro-neon-cyan) !important;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+  outline: none !important;
+}
+
+/* Range Sliders */
+input[type="range"] {
+  accent-color: var(--retro-neon-cyan) !important;
+}
+
+/* Stat Counters in Sidebar */
+.grid.grid-cols-4 div {
+  background: rgba(12, 16, 32, 0.9) !important;
+  border: 1px solid var(--retro-border) !important;
+  border-radius: 6px !important;
+}
+
+/* ==========================================================================
+   14. ERGONOMIC REORGANIZED TOOLBAR & WORKSPACE LAYOUT
+   ========================================================================== */
+.pro-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(14, 18, 36, 0.95) !important;
+  border: 1px solid var(--retro-border) !important;
+  border-radius: 8px;
+  color: var(--retro-neon-cyan) !important;
+  font-family: var(--retro-font-mono) !important;
+  font-size: 11px !important;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.pro-accordion-toggle:hover {
+  background: rgba(22, 28, 54, 0.98) !important;
+  border-color: var(--retro-neon-cyan) !important;
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+.pro-toggle-arrow {
+  color: var(--retro-neon-yellow);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Row 0: Actions & Main Controls */
+.pro-row-actions {
+  background: rgba(12, 15, 30, 0.95);
+  border: 1px solid var(--retro-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Row 1: Drawing & Canvas Tools */
+.pro-row-tools {
+  background: rgba(14, 19, 38, 0.92);
+  border: 1px solid var(--retro-border);
+  border-left: 4px solid var(--retro-neon-cyan);
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Active Tool highlight in Row 1 */
+.pro-row-tools button.bg-primary {
+  background: linear-gradient(135deg, #00f0ff 0%, #00b4d8 100%) !important;
+  color: #050814 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.6) !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Tool shortcut badges */
+.pro-tool-shortcut {
+  font-size: 9px;
+  opacity: 0.75;
+  margin-left: 3px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Sidebar Bulk Actions: 2-Column Balanced Grid */
+div[data-testid="bulk-actions"] {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 6px !important;
+}
+
+div[data-testid="bulk-actions"] button {
+  width: 100% !important;
+  padding: 7px 8px !important;
+  font-size: 11px !important;
+  justify-content: center !important;
+  text-align: center !important;
+  border-radius: 6px !important;
+}
+
+/* Integrated Pro buttons inside Bulk Actions */
+.pro-integrated-btn-merge {
+  background: linear-gradient(135deg, #a855f7, #7c3aed) !important;
+  border: 1px solid #c084fc !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4) !important;
+  grid-column: span 1 !important;
+}
+
+.pro-integrated-btn-grid {
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  border: 1px solid #38bdf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4) !important;
+  grid-column: span 1 !important;
+}

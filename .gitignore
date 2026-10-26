@@ -1,0 +1,10 @@
+# Hệ điều hành & file rác
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Backup files
+*.bak
+*.tmp
+*.orig
